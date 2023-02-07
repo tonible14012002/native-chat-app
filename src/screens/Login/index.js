@@ -1,127 +1,117 @@
-/* eslint-disable */
-
-import { Text, Button, Input, Layout } from "@ui-kitten/components"
-import { View, StyleSheet } from "react-native"
-import BackButton from "../../components/BackButton"
-import ScreenLayout from "../../components/ScreenLayout"
+import { Text, Button, Input, Layout, TopNavigation, TopNavigationAction } from '@ui-kitten/components';
+import { View, StyleSheet } from 'react-native';
+import ScreenLayout from '../../components/ScreenLayout';
+import globalStyles from '../../utils/GlobalStyles';
+import Icons from '../../components/Icons/Icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = ({ navigation, ...props }) => {
 
-    const handleBack = () => {
-        navigation.navigate("introduction")
-    }
     const handleLogin = () => {
-        navigation.navigate("app")
-    }
+        navigation.navigate('app');
+    };
 
     return (
-        <ScreenLayout style={styles.container}>
-            <BackButton 
-                onPress={handleBack}
-                style={styles.backButton}
+        <ScreenLayout>
+            <TopNavigation
+                title="Back"
+                accessoryLeft={BackAction}
             />
-            <View
-                style={styles.promptContainer}
-            >
-                <Text style={styles.mainPrompt}>
-                    Let's sign you in
-                </Text>
-                <Text style={styles.prompt}>
-                    Welcome back
-                </Text>
-                <Text style={styles.prompt}>
-                    You have been missed
-                </Text>
-            </View>
-            <Layout
-                style={styles.contentWrapper}
-                // level="4"
-            >
-                <View
-                    style={styles.inputWrapper}
-                >
-                    <Input 
-                        style={styles.input}
-                        textStyle={styles.inputText}
-                        size="large"
-                        placeholder="Username or email"
-                    />
-                    <Input 
-                        style={styles.input}
-                        textStyle={styles.inputText}
-                        size="large"
-                        placeholder="Password"
-                    />
-                </View>
-                <View style={styles.submitWrapper}>
-                    <Text
-                        appearance="hint"
-                    >
-                        Don't have an account ? Register
+            <Layout style={styles.container}>
+                <View>
+                    <Text category="h1">
+                        Let's sign you in
                     </Text>
-                    <Button 
-                        style={styles.button}
-                        onPress={handleLogin}
-                        size="giant"
-                    >
-                        Sign in
-                    </Button> 
+                    <Text category="h2" style={styles.prompt}>
+                        Welcome back
+                    </Text>
+                    <Text category="h2" style={styles.prompt}>
+                        You have been missed
+                    </Text>
                 </View>
+                <Layout
+                    style={styles.contentWrapper}
+                    // level="4"
+                >
+                    <View
+                        style={styles.inputWrapper}
+                    >
+                        <Input
+                            textStyle={styles.inputText}
+                            size="large"
+                            placeholder="Username or email"
+                        />
+                        <Input
+                            textStyle={styles.inputText}
+                            size="large"
+                            placeholder="Password"
+                        />
+                    </View>
+                    <View style={styles.submitWrapper}>
+                        <Text
+                            appearance="hint"
+                        >
+                            Don't have an account ? Register
+                        </Text>
+                        <Button
+                            style={styles.button}
+                            onPress={handleLogin}
+                            size="giant"
+                        >
+                            Sign in
+                        </Button>
+                    </View>
+                </Layout>
             </Layout>
         </ScreenLayout>
-    )
-}
+    );
+};
+
+const BackAction = () => {
+    const navigation = useNavigation();
+    const handePress = () => {
+        navigation.navigate('introduction');
+    };
+    return (
+        <TopNavigationAction icon={Icons.Back}
+            onPress={handePress}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
-    backButton: {
-        padding: 0,
-        marginHorizontal: 20,
-        alignSelf: "flex-start",
-        marginTop: 10,
-        transform: [{translateX: -20}]
-    },
-    mainPrompt: {
-        marginHorizontal: 20,
-        fontSize: 36,
-        fontWeight: "bold",
-        marginTop: 20,
-        marginBottom: 8
+    container: {
+        paddingHorizontal: globalStyles.screenPadding.horizontal,
+        paddingTop: 30,
+        flex: 1,
     },
     prompt: {
-        marginHorizontal: 20,
-        fontSize: 30,
-        fontWeight: "normal"
+        fontWeight: 'normal',
     },
     contentWrapper: {
-        flexGrow: 2,
-        alignItems: "center",
+        flexGrow: 1,
+        alignItems: 'center',
         marginTop: 50,
         paddingVertical: 50,
-        paddingHorizontal: 20,
-        justifyContent: "space-between",
+        justifyContent: 'space-between',
     },
     inputWrapper: {
-        width: "100%",
+        width: '100%',
         gap: 15,
-    },
-    input: {
-        borderRadius: 10,
     },
     inputText: {
         height: 45,
-        fontSize: 14
+        fontSize: 16,
     },
     submitWrapper: {
-        width: "100%",
-        alignItems: "center",
+        width: '100%',
+        alignItems: 'center',
         gap: 20,
-        paddingTop: 20
+        paddingTop: 20,
     },
     button: {
-        alignSelf: "stretch",
-        borderRadius: 10 
+        alignSelf: 'stretch',
     },
+});
 
-})
-
-export default Login
+export default Login;

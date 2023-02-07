@@ -1,17 +1,17 @@
-/* eslint-disable */
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import Login from '../screens/Login';
+import Chat from '../screens/Chat';
+import Profile from '../screens/Profile';
+import Introduction from '../screens/Introduction';
+import Search from '../screens/Search';
+import ChatDetail from '../screens/ChatDetail';
+import ChatSetting from '../screens/ChatSetting';
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
-import { NavigationContainer } from '@react-navigation/native'
-import { BottomNavigation, BottomNavigationTab } from "@ui-kitten/components"
-import Login from "../screens/Login"
-import Chat from "../screens/Chat"
-import Profile from "../screens/Profile"
-import Introduction from "../screens/Introduction"
-import Search from "../screens/Search"
-
-const AuthStack = createNativeStackNavigator()
-const Tab = createBottomTabNavigator()
+const AuthStack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
     // return ()
@@ -32,54 +32,80 @@ const Navigator = () => {
                     name="app"
                     component={MainApp}
                 />
+                <AuthStack.Screen
+                    name="chatDetail"
+                    component={ChatDetail}
+                />
+                <AuthStack.Screen
+                    name="search"
+                    component={Search}
+                />
+                <AuthStack.Screen
+                    name="chatSetting"
+                    component={ChatSetting}
+                />
             </AuthStack.Navigator>
         </NavigationContainer>
-    )
-}
+    );
+};
 
 const MainApp = () => {
+    const renderBottomTab = (props) => {
+        return (
+            <BottomTab {...props} />
+        );
+    };
     return (
         <Tab.Navigator
-            tabBar={props => <BottomTab {...props}/>}
+            tabBar={renderBottomTab}
             screenOptions={{headerShown: false}}
         >
             <Tab.Screen
-                name="home"
+                name="chat"
                 component={Chat}
             />
             <Tab.Screen
-                name="search"
-                component={Search}
+                name="group"
+                component={Profile}
             />
             <Tab.Screen
-                name="User"
+                name="user"
                 component={Profile}
             />
         </Tab.Navigator>
 
-    )
-}
+    );
+};
+
+// const ChatNavigation = () => {
+//     <ChatStack.Navigator>
+//         <Chat.Screen
+//             name="chatDetail"
+//             component={ChatDetail}
+//         />
+//     </ChatStack.Navigator>
+// }
 
 const BottomTab = ({ navigation, state }) => {
     const handleSelect = (index) => {
-        navigation.navigate(state.routeNames[index])
-    }
+        navigation.navigate(state.routeNames[index]);
+    };
     return (
         <BottomNavigation
             selectedIndex={state.index}
             onSelect={handleSelect}
         >
             <BottomNavigationTab
-                title="User"
-            />
-            <BottomNavigationTab
                 title="Chat"
             />
             <BottomNavigationTab
-                title="Search"
+                title="Group"
+            />
+            <BottomNavigationTab
+                title="User"
             />
         </BottomNavigation>
-    )
-}
+    );
+};
 
-export default Navigator
+export default Navigator;

@@ -1,19 +1,17 @@
-/* eslint-disable */
-import { Layout, Text, Input } from "@ui-kitten/components"
-import { View } from "react-native"
-import ScreenLayout from "../../components/ScreenLayout"
+import ScreenLayout from '../../components/ScreenLayout';
+import Header from './components/Header';
+import ChatList from './components/ChatList';
+import { Divider } from '@ui-kitten/components';
 
 const Chat = () => {
     return (
         <ScreenLayout>
-            <Text>Home</Text>
-            <Text appearance="hint">hint</Text>
-            <View style={{backgroundColor: "pink"}}>
-                <Text appearance="alternative">asdfasdf</Text>
-            </View>
-            <Input />
+            <Header />
+            <Divider />
+            <ChatList />
         </ScreenLayout>
-    )
-}
+    );
+};
 
-export default Chat
+
+export default Chat;

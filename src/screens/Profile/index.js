@@ -1,11 +1,9 @@
-import { View } from "react-native"
+import { View } from 'react-native';
 
 const Profile = ({navigation, ...props}) => {
     return (
-        <View>
-            
-        </View>
-    )
-}
+        <View />
+    );
+};
 
-export default Profile
+export default Profile;

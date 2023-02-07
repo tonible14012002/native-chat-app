@@ -1,4 +1,4 @@
-import { Layout, Text } from "@ui-kitten/components"
+import { Layout, Text } from '@ui-kitten/components';
 
 
 const Search = () => {
@@ -6,7 +6,7 @@ const Search = () => {
         <Layout>
             <Text>Search</Text>
         </Layout>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;
